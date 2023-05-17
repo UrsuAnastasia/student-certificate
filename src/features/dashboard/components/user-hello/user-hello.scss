@@ -1,0 +1,38 @@
+.user-hello {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(232, 240, 245);
+  filter: drop-shadow(2px 2px 6px #8a8ea0);
+  padding: 20px;
+  width: 100%;
+
+  margin-bottom: 20px;
+  border-radius: 8px;
+  &-image {
+    width: 150px;
+    margin-left: 50px;
+  }
+  &-name {
+    margin-top: 30px;
+    margin-left: 40px;
+    color: #244eb6;
+    text-shadow: 2px 2px 2px #b5bacc;
+    line-height: 34px;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  &-message {
+    margin-left: 40px;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 4px;
+    font-weight: 400;
+    color: #454c56;
+  }
+  &-date {
+    font-size: 12px;
+    line-height: 28px;
+    margin-top: 6px;
+    margin-left: 40px;
+    color: rgb(48, 51, 66);
+  }
+}

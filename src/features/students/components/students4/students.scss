@@ -1,0 +1,40 @@
+.students {
+  filter: drop-shadow(4px 3px 9px #7f828d) drop-shadow(-7px -7px 19px #fafbfc);
+  background-color: #ffff;
+  color: rgb(91, 91, 152);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  overflow: hidden;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 25px 20px 15px;
+  margin: 20px;
+
+  &-row {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  &-title {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+    color: #010c3f;
+  }
+
+  &-button {
+    background-image: linear-gradient(310deg, #1d49b8, #66bff9);
+    color: #ffff;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0 38px;
+    height: 40px;
+    margin-left: 26px;
+    border-radius: 10px;
+    &:hover {
+      background-image: linear-gradient(310deg, #0c3db9, #4aa9e9);
+      color: white !important;
+      border: unset !important;
+    }
+  }
+}

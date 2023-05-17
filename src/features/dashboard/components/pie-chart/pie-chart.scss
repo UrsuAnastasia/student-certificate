@@ -1,0 +1,33 @@
+.pie {
+  width: 100%;
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  padding: 24px 32px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(232, 240, 245);
+  filter: drop-shadow(2px 2px 10px #8a8ea0);
+  box-sizing: border-box;
+  border-radius: 8px;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  &-header {
+    border-bottom: 1px solid #eef0f7;
+    width: 100%;
+  }
+
+  &-title {
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+    font-weight: 400;
+    color: #010c3f;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  &-chart {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

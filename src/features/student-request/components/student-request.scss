@@ -1,0 +1,96 @@
+.request {
+  height: 100vh;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('https://cdn.wallpapersafari.com/4/53/lGdYRW.jpg');
+  position: relative;
+  &-first-conatiner {
+    h1 {
+      top: 250px;
+      font-size: 28px;
+      color: white;
+      text-shadow: 4px 1px 8px black;
+      padding: 80px 40px;
+      line-height: 46px;
+      font-weight: 500;
+      position: absolute;
+    }
+  }
+
+  &-people {
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+    object-fit: cover;
+    filter: drop-shadow(10px 10px 7px black);
+  }
+
+  &-message {
+    position: absolute;
+    top: 200px;
+    left: 220px;
+    transform: rotate(0.1turn);
+  }
+
+  &-second-conatiner {
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    label {
+      margin-bottom: 8px;
+    }
+  }
+
+  &-logo {
+    width: 250px;
+    margin-left: 30%;
+    margin-bottom: 50px;
+
+    img {
+      width: 100%;
+      filter: drop-shadow(0px 2px 4px rgb(188, 199, 247));
+    }
+  }
+
+  &-form {
+    border-radius: 20px;
+    padding: 60px 80px;
+    overflow: inherit;
+    box-shadow: inset 1px 1px 16px #e9eaf2, inset -1px -1px 16px #f5f6fa;
+    background-image: linear-gradient(#e6e7ed 0%, #f7f8fa 100%);
+    filter: drop-shadow(4px 3px 19px #8a8ea0) drop-shadow(-7px -7px 19px #9ba6b1);
+  }
+
+  &-checkbox {
+    font-family: 'Poppins' !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: #353b45;
+  }
+
+  &-button-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &-button {
+    background-image: linear-gradient(310deg, #1d49b8, #66bff9);
+    color: white;
+    width: 180px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+    border-radius: 10px;
+    &:hover {
+      background-image: linear-gradient(310deg, #0c3db9, #4aa9e9);
+      color: white !important;
+      border: unset !important;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 export const PAGES_PATHS = {
-  DASHBOARD: '/dashboard',
-  TODO_LIST: '/todo-list',
-  ACTIVITIES: '/ACTIVITIES',
+  LOGIN: '/',
+  STUDENT_REQUEST: '/cerere',
+  DASHBOARD: '/acasa',
+  SPECIALIZATION: '/specializari',
+  STUDENT: '/studenti',
 }

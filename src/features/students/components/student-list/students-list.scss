@@ -1,0 +1,41 @@
+.studentList {
+  &-name-email {
+    margin-left: 12px;
+  }
+  &-name {
+    font-weight: 500;
+    color: #260944;
+    font-size: 14px;
+    letter-spacing: 0.00938em;
+  }
+  &-email {
+    font-size: 12px;
+    color: #a9a9c8;
+  }
+  &-specialization {
+    width: 120px;
+    color: #260944;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 4px;
+    text-align: center;
+    background-color: #bdf0db;
+  }
+}
+.ant-table-cell {
+  font-weight: 500;
+  font-size: 14px;
+  color: #5b5b98;
+}
+.ant-table-thead {
+  font-weight: 400;
+  .ant-table-cell {
+    text-align: center;
+    padding: 16px;
+    font-weight: 400;
+    color: #260944 !important;
+    &::before {
+      display: none;
+    }
+  }
+}

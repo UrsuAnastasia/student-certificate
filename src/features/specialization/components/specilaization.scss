@@ -1,0 +1,21 @@
+.faculty {
+  margin-top: 80px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(232, 240, 245);
+  margin: 20px;
+  padding: 40px;
+  border-radius: 8px;
+  filter: drop-shadow(2px 2px 6px #8a8ea0);
+  &-title {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+    color: #010c3f;
+  }
+  &-filters {
+    padding: 24px 32px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(232, 240, 245);
+    filter: drop-shadow(2px 2px 6px #8a8ea0);
+  }
+}

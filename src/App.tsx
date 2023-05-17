@@ -1,17 +1,11 @@
-import { PageRouter } from 'pages/page-router'
-
-import { LayoutNavigation } from './layout/layout-header/layout-navigation'
-import { LayoutFooter } from 'layout/layout-footer/layout-footer'
-
+import { PageRouter } from 'pages/pages'
+import './index.scss'
+import { Layout } from 'antd'
 function App() {
   return (
-    <main>
-      <LayoutNavigation />
-
+    <Layout style={{ minHeight: '100vh' }}>
       <PageRouter />
-
-      <LayoutFooter />
-    </main>
+    </Layout>
   )
 }
 
