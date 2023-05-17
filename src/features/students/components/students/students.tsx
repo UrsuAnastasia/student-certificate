@@ -11,7 +11,6 @@ export const Students = () => {
   const data: DataType[] = []
   for (let i = 0; i < 46; i++) {
     data.push({
-      key: i,
       name: `Edward King ${i}`,
       specialization: 'Calculatoare',
       year: 'II',

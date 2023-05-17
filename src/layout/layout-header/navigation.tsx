@@ -1,6 +1,6 @@
 import Menu from 'antd/es/menu'
 import './navigation.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { PAGES_PATHS } from 'common/constants/constant'
 import { Col, Row } from 'antd/es/grid'
 import {
@@ -11,11 +11,35 @@ import {
 } from '@ant-design/icons'
 import { Button } from 'antd'
 export const Navbar: React.FC = () => {
+  const { pathname } = useLocation()
   const navigate = useNavigate()
+
+  const navbarList = [
+    {
+      icon: <HomeOutlined />,
+      text: 'Acasa',
+      location: PAGES_PATHS.DASHBOARD,
+    },
+    {
+      icon: <UsergroupDeleteOutlined />,
+      text: 'Studenti',
+      location: PAGES_PATHS.STUDENT,
+    },
+    {
+      icon: <GoldOutlined />,
+      text: 'Specializari',
+      location: PAGES_PATHS.SPECIALIZATION,
+    },
+    {
+      icon: <FileTextOutlined />,
+      text: 'Cereri',
+      location: PAGES_PATHS.REQUESTS,
+    },
+  ]
   return (
     <Menu mode='horizontal' className='navbar'>
-      <Row style={{ width: '100%' }} justify={'space-between'}>
-        <Col>
+      <Row justify={'space-between'} className='navbar-row'>
+        <Col span={12}>
           <div className='navbar-logo'>
             <img
               alt='usv'
@@ -23,20 +47,20 @@ export const Navbar: React.FC = () => {
             />
           </div>
         </Col>
-        <Col span={20} style={{ alignItems: 'flex-end' }} className='navbar-menu'>
-          <Menu.Item key='1' icon={<HomeOutlined />}>
-            <Link to={PAGES_PATHS.DASHBOARD}>Acasa</Link>
-          </Menu.Item>
-          <Menu.Item key='2' icon={<UsergroupDeleteOutlined />}>
-            <Link to={PAGES_PATHS.STUDENT}>Studenti</Link>
-          </Menu.Item>
-          <Menu.Item key='3' icon={<GoldOutlined />}>
-            <Link to={PAGES_PATHS.SPECIALIZATION}>Specializari</Link>
-          </Menu.Item>
-          <Menu.Item key='4' icon={<FileTextOutlined />}>
-            <Link to={PAGES_PATHS.SPECIALIZATION}>Cereri</Link>
-          </Menu.Item>
-          <Menu.Item key='5'>
+        <Col span={10} style={{ display: 'flex', justifyContent: 'space-between ' }}>
+          {navbarList.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={pathname !== item.location ? 'navbar-menu' : 'navbar-menu-active'}>
+                <span>{item.icon}</span>
+                <Link className='navbar-link' to={item.location}>
+                  {item.text}
+                </Link>
+              </div>
+            )
+          })}
+          <div>
             <Button
               className='navbar-button'
               onClick={() => {
@@ -44,7 +68,7 @@ export const Navbar: React.FC = () => {
               }}>
               Iesi
             </Button>
-          </Menu.Item>
+          </div>
         </Col>
       </Row>
     </Menu>

@@ -6,20 +6,29 @@
   overflow: hidden;
   box-shadow: none;
   border-radius: 10px;
-  padding: 25px 20px 15px;
+  padding: 50px 30px;
   margin: 20px;
 
   &-row {
     justify-content: space-between;
     align-items: center;
-    margin-top: 60px;
+    margin-bottom: 26px;
   }
 
   &-title {
-    font-size: 1.5rem;
+    font-size: 28px;
     line-height: 1.8rem;
     font-weight: 500;
     color: #010c3f;
+  }
+
+  &-program {
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f1f2fd;
+    color: #757fef;
+    padding: 6px 8px;
+    border-radius: 8px;
   }
 
   &-button {
@@ -31,10 +40,24 @@
     height: 40px;
     margin-left: 26px;
     border-radius: 10px;
+
     &:hover {
       background-image: linear-gradient(310deg, #0c3db9, #4aa9e9);
       color: white !important;
       border: unset !important;
     }
   }
+}
+
+.ant-tabs > .ant-tabs-nav {
+  margin-bottom: 40px;
+}
+
+.ant-table-cell {
+  font-weight: 500;
+  color: #3b404f;
+}
+.ant-table-thead {
+  background: #f7faff !important;
+  color: #898ab6 !important;
 }

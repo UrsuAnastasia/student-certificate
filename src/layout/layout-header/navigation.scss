@@ -5,10 +5,12 @@
   background: rgb(255, 255, 255);
   border: 1px solid rgb(232, 240, 245);
   filter: drop-shadow(2px 2px 6px #8a8ea0);
+  &-row {
+    width: 100%;
+  }
   &-logo {
-    width: 180px;
+    width: 140px;
     img {
-      margin-left: 20px;
       width: 100%;
       filter: drop-shadow(8px 5px 5px rgb(172, 168, 168));
     }
@@ -17,9 +19,28 @@
     text-align: end;
     font-size: 18px;
     font-weight: 500;
-    color: #244eb6;
+    color: #08090d !important;
     text-shadow: 2px 2px 4px #b5bacc;
+    padding: 0 8px;
+    span {
+      margin-right: 2px;
+    }
+    a {
+      color: #08090d !important;
+    }
   }
+  &-menu-active {
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #e4edf5;
+    color: #24398c !important;
+    padding: 0 16px;
+    border-radius: 8px;
+    span {
+      margin-right: 2px;
+    }
+  }
+
   &-button {
     background-image: linear-gradient(310deg, #1d49b8, #66bff9);
     color: white;
@@ -34,7 +55,4 @@
       border: unset !important;
     }
   }
-}
-.ant-menu-item-selected {
-  background-color: unset !important;
 }

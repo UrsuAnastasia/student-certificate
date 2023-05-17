@@ -1,9 +1,10 @@
 import { PAGES_PATHS } from 'common/constants/constant'
 import { Login } from 'features/auth/components/login/login'
 import { Dashboard } from 'features/dashboard/components/dashboard/dashboard'
+import { Requests } from 'features/requests/components/requests/requests'
 import { Specialization } from 'features/specialization/components/specialization'
 import { StudentRequest } from 'features/student-request/components/student-request'
-import { Students } from 'features/students/components/students4/students'
+import { Students } from 'features/students/components/students/students'
 import { LayoutBody } from 'layout/layout-body/layout-body'
 import { Route, Routes } from 'react-router-dom'
 
@@ -16,6 +17,7 @@ export const PageRouter = () => {
         <Route path={PAGES_PATHS.DASHBOARD} element={<Dashboard />} />
         <Route path={PAGES_PATHS.SPECIALIZATION} element={<Specialization />} />
         <Route path={PAGES_PATHS.STUDENT} element={<Students />} />
+        <Route path={PAGES_PATHS.REQUESTS} element={<Requests />} />
       </Route>
     </Routes>
   )

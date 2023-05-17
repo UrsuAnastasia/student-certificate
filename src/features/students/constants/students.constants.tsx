@@ -2,7 +2,7 @@ import { Row, Col } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 
 export type DataType = {
-  key: React.Key
+  key?: React.Key
   name: string
   specialization: string
   year: string
@@ -34,8 +34,8 @@ export const columns: ColumnsType<DataType> = [
     title: 'Program de studiu',
     dataIndex: 'specialization',
     render: (text) => (
-      <div className='studentList_specialization'>
-        <span>Calculatoare</span>
+      <div>
+        <span className='students-program'>Calculatoare</span>
       </div>
     ),
   },

@@ -1,6 +1,6 @@
 import { Button, Col, Input, Layout, Row, Tabs, TabsProps } from 'antd'
 import './specilaization.scss'
-import { SpecializationCard } from '../specialization-card/specialization-card'
+import { SpecializationCard } from './specialization-card/specialization-card'
 export const Specialization = () => {
   const onChange = (key: string) => {}
   const { Search } = Input
@@ -18,9 +18,9 @@ export const Specialization = () => {
   ]
   return (
     <Layout className='faculty'>
-      <Row align={'middle'} justify={'space-between'} style={{ margin: '0px' }}>
+      <Row align={'middle'} justify={'space-between'} style={{ marginBottom: '20px' }}>
         <Col>
-          <h1 className='faculty-title'>Studenti</h1>
+          <h1 className='faculty-title'>Specializare</h1>
         </Col>
         <Col>
           <Search size='large' placeholder='Cauta...' onSearch={() => {}} style={{ width: 200 }} />

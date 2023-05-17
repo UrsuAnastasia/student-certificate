@@ -22,20 +22,3 @@
     background-color: #bdf0db;
   }
 }
-.ant-table-cell {
-  font-weight: 500;
-  font-size: 14px;
-  color: #5b5b98;
-}
-.ant-table-thead {
-  font-weight: 400;
-  .ant-table-cell {
-    text-align: center;
-    padding: 16px;
-    font-weight: 400;
-    color: #260944 !important;
-    &::before {
-      display: none;
-    }
-  }
-}

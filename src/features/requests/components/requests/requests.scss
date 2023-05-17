@@ -1,0 +1,18 @@
+.requests-list {
+  filter: drop-shadow(4px 3px 9px #7f828d) drop-shadow(-7px -7px 19px #fafbfc);
+  background-color: #ffff;
+  color: rgb(91, 91, 152);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  overflow: hidden;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 20px;
+
+  &-title {
+    font-size: 28px;
+    line-height: 1.8rem;
+    font-weight: 500;
+    color: #010c3f;
+  }
+}
