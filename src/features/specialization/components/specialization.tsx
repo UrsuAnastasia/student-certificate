@@ -20,7 +20,7 @@ export const Specialization = () => {
     <Layout className='faculty'>
       <Row align={'middle'} justify={'space-between'} style={{ marginBottom: '20px' }}>
         <Col>
-          <h1 className='faculty-title'>Specializare</h1>
+          <h1 className='faculty-title'>Program de studii</h1>
         </Col>
         <Col>
           <Search size='large' placeholder='Cauta...' onSearch={() => {}} style={{ width: 200 }} />

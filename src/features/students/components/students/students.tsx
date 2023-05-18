@@ -1,6 +1,6 @@
 import { Button, Row, Input, Tabs, TabsProps, Col, Layout } from 'antd'
 import './students.scss'
-import { DataType, columns } from 'features/students/constants/students.constants'
+import { columns, data } from 'features/students/constants/students.constants'
 import { StudentList } from '../student-list/student-list'
 
 export const Students = () => {
@@ -8,15 +8,6 @@ export const Students = () => {
 
   const onChange = (key: string) => {}
 
-  const data: DataType[] = []
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      name: `Edward King ${i}`,
-      specialization: 'Calculatoare',
-      year: 'II',
-      email: ` @alissa1nelson`,
-    })
-  }
   const items: TabsProps['items'] = [
     {
       key: '1',

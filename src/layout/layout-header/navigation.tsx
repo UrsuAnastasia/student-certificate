@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
     },
     {
       icon: <GoldOutlined />,
-      text: 'Specializari',
+      text: 'Program de studii',
       location: PAGES_PATHS.SPECIALIZATION,
     },
     {
@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
   return (
     <Menu mode='horizontal' className='navbar'>
       <Row justify={'space-between'} className='navbar-row'>
-        <Col span={12}>
+        <Col span={14}>
           <div className='navbar-logo'>
             <img
               alt='usv'

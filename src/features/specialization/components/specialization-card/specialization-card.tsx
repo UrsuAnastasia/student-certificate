@@ -4,7 +4,7 @@ import { faculties } from 'features/specialization/constants/specialization.cons
 
 export const SpecializationCard = () => {
   return (
-    <Row gutter={[40, 40]}>
+    <Row gutter={[20, 20]}>
       {faculties.map((item, index) => (
         <Col xs={24} sm={12} md={8} lg={4} xl={6} key={index}>
           <Card hoverable className='card-container'>
