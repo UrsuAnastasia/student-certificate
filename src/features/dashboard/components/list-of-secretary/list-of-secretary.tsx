@@ -66,7 +66,13 @@ export const ListOfSecretary = () => {
 
   return (
     <div className='secretary'>
-      <Table style={{ width: '100%' }} size='small' columns={columns} dataSource={data} />
+      <Table
+        pagination={false}
+        style={{ width: '100%' }}
+        size='small'
+        columns={columns}
+        dataSource={data}
+      />
     </div>
   )
 }

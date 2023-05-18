@@ -41,7 +41,7 @@ export const PieChart: FC<ILicense> = ({ ...props }: any) => {
         <h1 className='pie-title'>{props.title}</h1>
       </div>
       <div className='pie-chart'>
-        <Doughnut width={'40%'} height={200} options={options} data={data} />
+        <Doughnut width={'40%'} height={170} options={options} data={data} />
       </div>
     </div>
   )
