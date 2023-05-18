@@ -1,20 +1,52 @@
 import { Button, Checkbox, Form, Input } from 'antd'
 import './student-request.scss'
-import { specialization } from '../constants/request.constants'
+import { IRequest, specialization } from '../constants/request.constants'
 import TextArea from 'antd/es/input/TextArea'
+import { useState } from 'react'
 
 export const StudentRequest = () => {
-  // const [request, setRequest] = useState<any>({
-  //   name: '',
-  //   faculty: '',
-  //   reason: '',
-  // })
+  const [request, setRequest] = useState<IRequest>({
+    name: '',
+    reason: '',
+    faculty: null,
+  })
+  const [form] = Form.useForm()
+  const initialValues = [
+    {
+      name: ['name'],
+      value: request.name,
+    },
+    {
+      name: ['faculty'],
+      value: request.faculty,
+    },
+    {
+      name: ['reason'],
+      value: request.reason,
+    },
+  ]
   const onFinish = (values: any) => {
-    console.log('Success:', values)
+    form.validateFields()
   }
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
+  const hadlChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setRequest({
+      ...request,
+      [name]: value,
+    })
+  }
+  const handleChangeFaculty = (value: any) => {
+    if (request.faculty === value) {
+      setRequest({
+        ...request,
+        faculty: null, // Uncheck the checkbox
+      })
+    } else {
+      setRequest({
+        ...request,
+        faculty: value,
+      })
+    }
   }
   return (
     <div className='request'>
@@ -40,33 +72,50 @@ export const StudentRequest = () => {
 
         <Form
           className='request-form'
-          name='basic'
-          initialValues={{ remember: true }}
+          name='register'
+          scrollToFirstError
+          initialValues={initialValues}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete='off'>
+          form={form}>
           <label className='request-checkbox'>Nume Prenume</label>
           <Form.Item
-            name='username'
+            name='name'
+            initialValue={request.name}
             rules={[{ required: true, message: 'Va rog completati acest camp!' }]}>
-            <Input />
+            <Input name='name' onChange={hadlChangeInput} />
           </Form.Item>
-          {specialization.map((item) => {
+          {specialization.map((item, index) => {
             return (
-              <Form.Item name='remember' valuePropName='checked'>
-                <Checkbox value={item.id} className='request-checkbox'>
+              <Form.Item
+                name={`faculty_${item.id}`}
+                initialValue={request.faculty}
+                valuePropName='checked'
+                key={item.id}>
+                <Checkbox
+                  name='faculty'
+                  className='request-checkbox'
+                  onChange={() => handleChangeFaculty(item.id)}>
                   {item.name}
                 </Checkbox>
               </Form.Item>
             )
-          })}{' '}
+          })}
           <Form.Item
-            name={'motivation'}
+            name={'reason'}
             rules={[{ required: true, message: 'Va rog completati acest camp!' }]}>
-            <TextArea placeholder='Adeverinta se elibereaza pentru....' rows={4} maxLength={16} />
+            <TextArea
+              placeholder='Adeverinta se elibereaza pentru....'
+              rows={4}
+              maxLength={16}
+              onChange={({ target: { value } }) => {
+                setRequest({ ...request, reason: value })
+              }}
+            />
           </Form.Item>
           <Form.Item className='request-button-container'>
-            <Button className='request-button'>Trimite</Button>
+            <Button className='request-button' onClick={onFinish}>
+              Trimite
+            </Button>
           </Form.Item>
         </Form>
       </div>

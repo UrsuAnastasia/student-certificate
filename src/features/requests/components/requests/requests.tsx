@@ -4,19 +4,13 @@ import { Button, Modal, Space, Table, Tag } from 'antd'
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from 'react'
 import { ColumnsType } from 'antd/es/table'
 import { DataTypeRequest, RequestsType, data } from 'features/requests/constants/request.constants'
-import {
-  DeleteOutlined,
-  CheckOutlined,
-  ExclamationCircleFilled,
-  CheckCircleOutlined,
-} from '@ant-design/icons'
+import { AiFillDownCircle, AiFillCloseCircle, AiFillDelete, AiOutlineCheck } from 'react-icons/ai'
+
 const { confirm } = Modal
 export const Requests = () => {
   const showDeleteConfirm = () => {
     confirm({
       title: 'Vrei sa declini aceasta cerere?',
-      icon: <ExclamationCircleFilled style={{ color: 'red' }} />,
-      content: 'Some descriptions',
       okText: 'DA',
       okType: 'danger',
       cancelText: 'Nu',
@@ -28,7 +22,6 @@ export const Requests = () => {
   const showConfirm = () => {
     confirm({
       title: 'Vrei sa accepti aceasta cerere?',
-      icon: <CheckCircleOutlined style={{ color: '#62b33e' }} />,
       okText: 'NU',
       cancelText: 'Da',
       onOk() {},
@@ -104,13 +97,13 @@ export const Requests = () => {
           <Button
             style={{ border: '1px solid #62b33e', background: '#f6ffed' }}
             onClick={showConfirm}
-            icon={<CheckOutlined style={{ color: '#62b33e' }} />}
+            icon={<AiOutlineCheck style={{ color: '#62b33e' }} />}
           />
           <Button
             style={{ border: '1px solid red', background: '#fff2e8' }}
             color='red'
             onClick={() => showDeleteConfirm()}
-            icon={<DeleteOutlined style={{ color: 'red' }} />}
+            icon={<AiFillDelete style={{ fill: 'red' }} />}
           />
         </Space>
       ),

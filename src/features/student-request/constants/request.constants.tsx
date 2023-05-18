@@ -7,3 +7,9 @@ export const specialization = [
   { id: 6, name: 'Echipamente şi sisteme medicale' },
   { id: 7, name: 'Echipamente sisteme de comandă şi control pentru autovehicule' },
 ]
+
+export type IRequest = {
+  name: string
+  reason: string
+  faculty: number | null
+}

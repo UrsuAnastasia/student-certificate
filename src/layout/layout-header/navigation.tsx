@@ -3,12 +3,7 @@ import './navigation.scss'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { PAGES_PATHS } from 'common/constants/constant'
 import { Col, Row } from 'antd/es/grid'
-import {
-  UsergroupDeleteOutlined,
-  GoldOutlined,
-  HomeOutlined,
-  FileTextOutlined,
-} from '@ant-design/icons'
+import { AiFillHome, AiOutlineUsergroupAdd, AiFillGold, AiFillFile } from 'react-icons/ai'
 import { Button } from 'antd'
 export const Navbar: React.FC = () => {
   const { pathname } = useLocation()
@@ -16,22 +11,22 @@ export const Navbar: React.FC = () => {
 
   const navbarList = [
     {
-      icon: <HomeOutlined />,
+      icon: <AiFillHome />,
       text: 'Acasa',
       location: PAGES_PATHS.DASHBOARD,
     },
     {
-      icon: <UsergroupDeleteOutlined />,
+      icon: <AiOutlineUsergroupAdd />,
       text: 'Studenti',
       location: PAGES_PATHS.STUDENT,
     },
     {
-      icon: <GoldOutlined />,
+      icon: <AiFillGold />,
       text: 'Program de studii',
       location: PAGES_PATHS.SPECIALIZATION,
     },
     {
-      icon: <FileTextOutlined />,
+      icon: <AiFillFile />,
       text: 'Cereri',
       location: PAGES_PATHS.REQUESTS,
     },
@@ -39,7 +34,7 @@ export const Navbar: React.FC = () => {
   return (
     <Menu mode='horizontal' className='navbar'>
       <Row justify={'space-between'} className='navbar-row'>
-        <Col span={14}>
+        <Col>
           <div className='navbar-logo'>
             <img
               alt='usv'
@@ -47,7 +42,7 @@ export const Navbar: React.FC = () => {
             />
           </div>
         </Col>
-        <Col span={10} style={{ display: 'flex', justifyContent: 'space-between ' }}>
+        <Col lg={14} xl={10} style={{ display: 'flex', justifyContent: 'space-between ' }}>
           {navbarList.map((item, index) => {
             return (
               <div
@@ -66,7 +61,7 @@ export const Navbar: React.FC = () => {
               onClick={() => {
                 navigate(PAGES_PATHS.LOGIN)
               }}>
-              Iesi
+              Log out
             </Button>
           </div>
         </Col>

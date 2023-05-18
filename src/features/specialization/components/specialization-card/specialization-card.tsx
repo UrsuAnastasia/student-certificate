@@ -1,18 +1,42 @@
-import { Card, Col, Row } from 'antd'
+import { Card, Col, Modal, Row } from 'antd'
 import './specialization-card.scss'
 import { faculties } from 'features/specialization/constants/specialization.constants'
-
+import { AiOutlineEye, AiOutlineClose } from 'react-icons/ai'
 export const SpecializationCard = () => {
+  const { confirm } = Modal
+  const showConfirm = (id: number) => {
+    confirm({
+      okText: 'Nu',
+      okType: 'danger',
+      cancelText: 'Da',
+      title: 'Vrei sa stergi aceste date?',
+      onOk() {
+        console.log('id', id)
+      },
+      onCancel() {
+        console.log('id', id)
+      },
+    })
+  }
+
   return (
     <Row gutter={[20, 20]}>
       {faculties.map((item, index) => (
         <Col xs={24} sm={12} md={8} lg={4} xl={6} key={index}>
           <Card hoverable className='card-container'>
+            <div className='card-header'>
+              <div className='card-eye'>
+                <AiOutlineEye />
+              </div>
+              <div className='card-trash' onClick={() => showConfirm(item.id)}>
+                <AiOutlineClose />
+              </div>
+            </div>
             <div className='card-circle'>
               <img
                 alt='cover'
                 src={
-                  'https://cdni.iconscout.com/illustration/premium/thumb/data-analysis-5560609-4634130.png?f=webp'
+                  'https://cdni.iconscout.com/illustration/premium/thumb/mail-marketing-3406153-2840774.png?f=webp'
                 }
               />
             </div>
