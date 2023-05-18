@@ -11,3 +11,26 @@ export interface DataTypeRequest {
   faculty: string
   status: string
 }
+export const data: DataTypeRequest[] = [
+  {
+    key: '1',
+    name: 'John Brown',
+    email: 'ana@mail.com',
+    faculty: 'Calculatoare',
+    status: 'DECLINED',
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    email: 'ana@mail.com',
+    faculty: 'Calculatoare',
+    status: 'NEW',
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    email: 'ana@mail.com',
+    faculty: 'Calculatoare',
+    status: 'APPROVED',
+  },
+]

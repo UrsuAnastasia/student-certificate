@@ -1,34 +1,40 @@
 import Layout from 'antd/es/layout/layout'
 import './requests.scss'
-import { Button, Space, Table, Tag } from 'antd'
+import { Button, Modal, Space, Table, Tag } from 'antd'
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from 'react'
 import { ColumnsType } from 'antd/es/table'
-import { DataTypeRequest, RequestsType } from 'features/requests/constants/request.constants'
-import { DeleteOutlined, CheckOutlined } from '@ant-design/icons'
-const data: DataTypeRequest[] = [
-  {
-    key: '1',
-    name: 'John Brown',
-    email: 'ana@mail.com',
-    faculty: 'Calculatoare',
-    status: 'DECLINED',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    email: 'ana@mail.com',
-    faculty: 'Calculatoare',
-    status: 'NEW',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    email: 'ana@mail.com',
-    faculty: 'Calculatoare',
-    status: 'APPROVED',
-  },
-]
+import { DataTypeRequest, RequestsType, data } from 'features/requests/constants/request.constants'
+import {
+  DeleteOutlined,
+  CheckOutlined,
+  ExclamationCircleFilled,
+  CheckCircleOutlined,
+} from '@ant-design/icons'
+const { confirm } = Modal
 export const Requests = () => {
+  const showDeleteConfirm = () => {
+    confirm({
+      title: 'Vrei sa declini aceasta cerere?',
+      icon: <ExclamationCircleFilled style={{ color: 'red' }} />,
+      content: 'Some descriptions',
+      okText: 'DA',
+      okType: 'danger',
+      cancelText: 'Nu',
+      onOk() {},
+      onCancel() {},
+    })
+  }
+
+  const showConfirm = () => {
+    confirm({
+      title: 'Vrei sa accepti aceasta cerere?',
+      icon: <CheckCircleOutlined style={{ color: '#62b33e' }} />,
+      okText: 'NU',
+      cancelText: 'Da',
+      onOk() {},
+      onCancel() {},
+    })
+  }
   const renderColor = (color: string) => {
     switch (color) {
       case RequestsType.APPROVED:
@@ -97,11 +103,13 @@ export const Requests = () => {
         <Space size='middle'>
           <Button
             style={{ border: '1px solid #62b33e', background: '#f6ffed' }}
+            onClick={showConfirm}
             icon={<CheckOutlined style={{ color: '#62b33e' }} />}
           />
           <Button
             style={{ border: '1px solid red', background: '#fff2e8' }}
             color='red'
+            onClick={() => showDeleteConfirm()}
             icon={<DeleteOutlined style={{ color: 'red' }} />}
           />
         </Space>

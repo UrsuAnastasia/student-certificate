@@ -4,5 +4,5 @@ export const PAGES_PATHS = {
   DASHBOARD: '/acasa',
   SPECIALIZATION: '/specializari',
   STUDENT: '/studenti',
-  REQUESTS: 'cerere',
+  REQUESTS: 'cereri',
 }
