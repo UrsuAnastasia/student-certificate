@@ -48,7 +48,7 @@ export const ListOfSecretary = () => {
       key: '3',
       name: 'Secretaring. Lucia-Cristina POPESCU',
       email: 'lucia.popescu@usm.ro',
-      telephone: 'telefon: +40 230 522978, ext.124',
+      telephone: '+40 230 522978, ext.124',
     },
     {
       key: '4',
