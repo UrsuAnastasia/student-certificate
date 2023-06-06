@@ -35,20 +35,20 @@
   }
 
   &-second-conatiner {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
     label {
       margin-bottom: 8px;
     }
   }
 
   &-logo {
+    margin-top: 50px;
     width: 250px;
-    margin-left: 30%;
-    margin-bottom: 50px;
+    z-index: 11111;
+    left: 0;
 
     img {
       width: 100%;
@@ -57,19 +57,17 @@
   }
 
   &-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
     border-radius: 20px;
-    padding: 60px 80px;
+    padding: 40px 20px;
     overflow: inherit;
     box-shadow: inset 1px 1px 16px #e9eaf2, inset -1px -1px 16px #f5f6fa;
     background-image: linear-gradient(#e6e7ed 0%, #f7f8fa 100%);
     filter: drop-shadow(4px 3px 19px #8a8ea0) drop-shadow(-7px -7px 19px #9ba6b1);
-  }
-
-  &-checkbox {
-    font-family: 'Poppins' !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    color: #353b45;
   }
 
   &-button-container {

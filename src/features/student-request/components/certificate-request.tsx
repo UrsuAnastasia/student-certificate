@@ -1,25 +1,15 @@
-import { Button, Checkbox, Form, Input } from 'antd'
-import './student-request.scss'
-import { IRequest, specialization } from '../constants/request.constants'
+import { Button, Form } from 'antd'
+import './certificate-request.scss'
+import { IRequest } from '../constants/request.constants'
 import TextArea from 'antd/es/input/TextArea'
 import { useState } from 'react'
 
 export const StudentRequest = () => {
   const [request, setRequest] = useState<IRequest>({
-    name: '',
     reason: '',
-    faculty: null,
   })
   const [form] = Form.useForm()
   const initialValues = [
-    {
-      name: ['name'],
-      value: request.name,
-    },
-    {
-      name: ['faculty'],
-      value: request.faculty,
-    },
     {
       name: ['reason'],
       value: request.reason,
@@ -28,26 +18,7 @@ export const StudentRequest = () => {
   const onFinish = (values: any) => {
     form.validateFields()
   }
-  const hadlChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setRequest({
-      ...request,
-      [name]: value,
-    })
-  }
-  const handleChangeFaculty = (value: any) => {
-    if (request.faculty === value) {
-      setRequest({
-        ...request,
-        faculty: null, // Uncheck the checkbox
-      })
-    } else {
-      setRequest({
-        ...request,
-        faculty: value,
-      })
-    }
-  }
+
   return (
     <div className='request'>
       <div className='request-first-conatiner'>
@@ -77,35 +48,12 @@ export const StudentRequest = () => {
           initialValues={initialValues}
           onFinish={onFinish}
           form={form}>
-          <label className='request-checkbox'>Nume Prenume</label>
-          <Form.Item
-            name='name'
-            initialValue={request.name}
-            rules={[{ required: true, message: 'Va rog completati acest camp!' }]}>
-            <Input name='name' onChange={hadlChangeInput} />
-          </Form.Item>
-          {specialization.map((item, index) => {
-            return (
-              <Form.Item
-                name={`faculty_${item.id}`}
-                initialValue={request.faculty}
-                valuePropName='checked'
-                key={item.id}>
-                <Checkbox
-                  name='faculty'
-                  className='request-checkbox'
-                  onChange={() => handleChangeFaculty(item.id)}>
-                  {item.name}
-                </Checkbox>
-              </Form.Item>
-            )
-          })}
           <Form.Item
             name={'reason'}
             rules={[{ required: true, message: 'Va rog completati acest camp!' }]}>
             <TextArea
               placeholder='Adeverinta se elibereaza pentru....'
-              rows={4}
+              rows={10}
               maxLength={16}
               onChange={({ target: { value } }) => {
                 setRequest({ ...request, reason: value })

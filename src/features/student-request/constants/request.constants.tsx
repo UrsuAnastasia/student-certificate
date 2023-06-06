@@ -9,7 +9,5 @@ export const specialization = [
 ]
 
 export type IRequest = {
-  name: string
   reason: string
-  faculty: number | null
 }

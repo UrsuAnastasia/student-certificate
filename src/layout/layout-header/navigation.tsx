@@ -3,7 +3,13 @@ import './navigation.scss'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { PAGES_PATHS } from 'common/constants/constant'
 import { Col, Row } from 'antd/es/grid'
-import { AiFillHome, AiOutlineUsergroupAdd, AiFillGold, AiFillFile } from 'react-icons/ai'
+import {
+  AiFillHome,
+  AiOutlineUsergroupAdd,
+  AiFillGold,
+  AiFillFile,
+  AiFillSetting,
+} from 'react-icons/ai'
 import { Button } from 'antd'
 export const Navbar: React.FC = () => {
   const { pathname } = useLocation()
@@ -30,6 +36,11 @@ export const Navbar: React.FC = () => {
       text: 'Cereri',
       location: PAGES_PATHS.REQUESTS,
     },
+    {
+      icon: <AiFillSetting />,
+      text: 'Setari',
+      location: PAGES_PATHS.SETTINGS,
+    },
   ]
   return (
     <Menu mode='horizontal' className='navbar'>
@@ -42,7 +53,7 @@ export const Navbar: React.FC = () => {
             />
           </div>
         </Col>
-        <Col lg={14} xl={10} style={{ display: 'flex', justifyContent: 'space-between ' }}>
+        <Col lg={14} xl={12} style={{ display: 'flex', justifyContent: 'space-between ' }}>
           {navbarList.map((item, index) => {
             return (
               <div

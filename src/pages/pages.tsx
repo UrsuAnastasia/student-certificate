@@ -1,9 +1,12 @@
+import axios from 'axios'
 import { PAGES_PATHS } from 'common/constants/constant'
+import { OauthRedirect } from 'features/auth/components/login/auth-redirect'
 import { Login } from 'features/auth/components/login/login'
 import { Dashboard } from 'features/dashboard/components/dashboard/dashboard'
 import { Requests } from 'features/requests/components/requests/requests'
+import { Settings } from 'features/settings/components/settings/settings'
 import { Specialization } from 'features/specialization/components/specialization/specialization'
-import { StudentRequest } from 'features/student-request/components/student-request'
+import { StudentRequest } from 'features/student-request/components/certificate-request'
 import { Students } from 'features/students/components/students/students'
 import { LayoutBody } from 'layout/layout-body/layout-body'
 import { Route, Routes } from 'react-router-dom'
@@ -18,6 +21,7 @@ export const PageRouter = () => {
         <Route path={PAGES_PATHS.SPECIALIZATION} element={<Specialization />} />
         <Route path={PAGES_PATHS.STUDENT} element={<Students />} />
         <Route path={PAGES_PATHS.REQUESTS} element={<Requests />} />
+        <Route path={PAGES_PATHS.SETTINGS} element={<Settings />} />
       </Route>
     </Routes>
   )

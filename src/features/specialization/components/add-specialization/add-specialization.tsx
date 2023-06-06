@@ -50,7 +50,6 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
   }
 
   const handlSubmit = (values: any) => {
-    console.log('Received values of form: ', formData)
     form.validateFields()
   }
   return (

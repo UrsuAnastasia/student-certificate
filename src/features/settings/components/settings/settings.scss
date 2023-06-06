@@ -1,18 +1,34 @@
-.requests-list {
+.settings {
+  display: flex;
+  justify-content: center;
   filter: drop-shadow(4px 3px 9px #7f828d) drop-shadow(-7px -7px 19px #fafbfc);
-  background-color: #ffff;
+  background-color: white;
   color: rgb(91, 91, 152);
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   overflow: hidden;
   box-shadow: none;
   border-radius: 10px;
-  padding: 40px 20px;
+  padding: 50px 30px;
   margin: 20px;
-
+  &-container {
+    width: 60%;
+  }
   &-title {
     font-size: 26px;
     line-height: 1.8rem;
+    font-weight: 600;
+    color: #010c3f;
+    margin-bottom: 30px;
+  }
+
+  &-table {
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+
+  &-table-title {
     font-weight: 500;
+    font-size: 20px;
     color: #010c3f;
     margin-bottom: 30px;
   }
