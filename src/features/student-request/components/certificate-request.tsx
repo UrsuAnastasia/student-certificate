@@ -1,46 +1,63 @@
 import { Button, Form } from 'antd'
 import './certificate-request.scss'
-import { IRequest } from '../constants/request.constants'
+import { IRequest, messageImage, studentImage } from '../constants/request.constants'
 import TextArea from 'antd/es/input/TextArea'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getCurrentUser } from 'features/auth/store/auth.slice'
+import { useAppDispatch, useAppSelector, RootState } from 'store/store'
+import { backgroundImg } from 'features/auth/constants/auth.constants'
+import { Certificate } from '../models/certificate-request'
+import { createRequest } from '../store/certificate-request.slice'
+import { errorModal, successModal } from 'common/hooks/useSomething'
+import { useNavigate } from 'react-router-dom'
+import { PAGES_PATHS } from 'common/constants/constant'
 
 export const StudentRequest = () => {
   const [request, setRequest] = useState<IRequest>({
     reason: '',
   })
   const [form] = Form.useForm()
+
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const currentUSer = useAppSelector((state: RootState) => state.user)
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
+
   const initialValues = [
     {
       name: ['reason'],
       value: request.reason,
     },
   ]
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     form.validateFields()
+    const payload: Certificate = {
+      userId: currentUSer.user?.id!,
+      reason: request.reason,
+    }
+    const response = await dispatch(createRequest(payload))
+    if (response.type === 'POST_DOMAIN/rejected') {
+      errorModal('Eroare', 'A aparut o eroare')
+    } else {
+      successModal('Succes', 'Cererea a fost creata cu succes.')
+      navigate(PAGES_PATHS.DASHBOARD)
+    }
+    form.resetFields()
   }
 
   return (
     <div className='request'>
       <div className='request-first-conatiner'>
-        <img
-          className='request-message'
-          alt=''
-          src='https://ouch-cdn2.icons8.com/dJTKWevm6cRSy3jud2axw2vpIitUuyOJ4DUJFGN0zmw/rs:fit:256:271/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvOTE2/LzkzNzk4OTlkLThh/YzEtNDk2My05YjJk/LTg5Yjg0NTI3ZDY1/Ni5zdmc.png'
-        />
-        <img
-          className='request-people'
-          alt=''
-          src='https://cdni.iconscout.com/illustration/premium/thumb/mail-sending-5491574-4607130.png?f=webp'
-        />
+        <img className='request-message' alt='' src={backgroundImg} />
+        <img className='request-people' alt='' src={messageImage} />
       </div>
       <div className='request-second-conatiner'>
         <div className='request-logo'>
-          <img
-            alt='usv'
-            src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/%C8%98tefan_cel_Mare_University_of_Suceava_logo.svg/2560px-%C8%98tefan_cel_Mare_University_of_Suceava_logo.svg.png'
-          />
+          <img alt='usv' src={studentImage} />
         </div>
-
         <Form
           className='request-form'
           name='register'

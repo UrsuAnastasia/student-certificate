@@ -1,7 +1,8 @@
 export type ISpecialization = {
+  id?: number
   name: string
-  year: string
-  dean: string
-  secretary: string
-  specialization: Array<any>
+  description?: string
+  acronym: string
+  secretaryId: string
+  secretaryName?: string
 }

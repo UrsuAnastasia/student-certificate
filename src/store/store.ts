@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import userSlice from 'features/auth/store/auth.slice'
 import settingsSlice from 'features/settings/store/settings.slice'
 import certificateSlice from 'features/student-request/store/certificate-request.slice'
 import studentsSlice from 'features/students/store/students.slice'
@@ -9,6 +10,7 @@ export const store = configureStore({
     certificate: certificateSlice,
     students: studentsSlice,
     settings: settingsSlice,
+    user: userSlice,
   },
 })
 

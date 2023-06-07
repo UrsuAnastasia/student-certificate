@@ -55,6 +55,7 @@
       border: unset !important;
     }
   }
+
   &-image {
     width: 50%;
     img {
@@ -62,5 +63,9 @@
       width: 90%;
       filter: drop-shadow(10px 10px 8px black);
     }
+  }
+  &-link {
+    color: white;
+    font-size: 16px;
   }
 }

@@ -9,11 +9,10 @@ interface CertificateSliceState {
   certificate: Certificate | null
 }
 
-export const getServices: any = createAsyncThunk(
+export const createRequest: any = createAsyncThunk(
   certificateActions.POST_CERTIFICATE_REQUEST,
-  async () => {
-    const response = await api.post('certificate-requests')
-
+  async (request: Certificate) => {
+    const response = await api.post('certificate-requests', request)
     return response.data
   },
 )
@@ -25,7 +24,11 @@ export const certificateSlice = createSlice({
   name: 'certificate',
   initialState,
   reducers: {},
-  extraReducers(builder: any) {},
+  extraReducers(builder: any) {
+    builder.addCase(createRequest.fulfilled, (state: CertificateSliceState, action: any) => {
+      state.certificate = action.payload
+    })
+  },
 })
 
 export default certificateSlice.reducer

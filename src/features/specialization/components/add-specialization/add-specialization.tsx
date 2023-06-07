@@ -2,10 +2,10 @@ import { Button, Form, Input, Modal, Select } from 'antd'
 import { FC, useState } from 'react'
 import './add-specialization.scss'
 import { ISpecialization } from 'features/specialization/models/models.specialization'
-import {
-  secretaryOptions,
-  specializationOptions,
-} from 'features/specialization/constants/specialization.constants'
+import { secretaryOptions } from 'features/specialization/constants/specialization.constants'
+import { addStudyProgram } from 'features/specialization/store/stydy-program.slice'
+import { useAppDispatch } from 'store/store'
+import { errorModal, successModal } from 'common/hooks/useSomething'
 interface IAddModal {
   showModal: boolean
   setShowModal: (showModal: boolean) => void
@@ -13,11 +13,12 @@ interface IAddModal {
 export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
   const [formData, setFormData] = useState<ISpecialization>({
     name: '',
-    year: '',
-    dean: '',
-    secretary: '',
-    specialization: [],
+    acronym: '',
+    secretaryId: '',
   })
+
+  const dispatch = useAppDispatch()
+
   const [form] = Form.useForm()
 
   const initialValues = [
@@ -26,20 +27,18 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
       value: formData.name,
     },
     {
-      name: ['year'],
-      value: formData.year,
+      name: ['acronym'],
+      value: formData.name,
     },
     {
-      name: ['dean'],
-      value: formData.dean,
-    },
-    {
-      name: ['secretary'],
-      value: formData.secretary,
+      name: ['secretaryId'],
+      value: formData.name,
     },
   ]
+
   const hadlChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+
     setFormData({
       ...formData,
       [name]: value,
@@ -49,8 +48,21 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
     props.setShowModal(false)
   }
 
-  const handlSubmit = (values: any) => {
+  const handlSubmit = async (values: any) => {
     form.validateFields()
+    const payload = {
+      name: formData.name,
+      acronym: formData.acronym,
+      secretaryId: '4432df1b-43ed-47e7-b7b3-a43e53f04570',
+    }
+    const response = await dispatch(addStudyProgram(payload))
+    if (response.type === 'POST_YEAR/rejected') {
+      errorModal('Eroare', 'A aparut o eroare')
+    } else {
+      props.setShowModal(false)
+      successModal('Succes', 'Programul de studiu a fost adaugat cu succes.')
+    }
+    form.resetFields()
   }
   return (
     <Modal
@@ -73,11 +85,8 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
         style={{ marginTop: '20px' }}
         fields={initialValues}
         onFinish={handlSubmit}>
-        <Form.Item
-          name='name'
-          initialValue={formData.name}
-          rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
-          <label className='add-specialization-label'>Denumirea și acronimul facultății</label>
+        <Form.Item name='name' rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
+          <label className='add-specialization-label'>Denumirea programului de studiu</label>
           <Input
             name='name'
             allowClear
@@ -86,44 +95,29 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
             value={formData.name}
           />
         </Form.Item>
-        <Form.Item name='year' rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
-          <label className='add-specialization-label'>Anul universitar curent</label>
-          <Input name='year' allowClear placeholder='2023' onChange={hadlChangeInput} />
-        </Form.Item>
-        <Form.Item name='dean' rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
-          <label className='add-specialization-label'>Numele decanului</label>
+        <Form.Item
+          name='acronym'
+          initialValue={formData.acronym}
+          rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
+          <label className='add-specialization-label'>Acronimul facultății</label>
           <Input
-            name='dean'
-            placeholder='Prof.univ.dr.ing. Laurenţiu Dan MILICI'
+            name='acronym'
+            allowClear
+            placeholder='FIESC'
             onChange={hadlChangeInput}
+            value={formData.acronym}
           />
         </Form.Item>
         <Form.Item
-          name='secretary'
+          name='secretaryId'
           rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
           <label className='add-specialization-label'>Numele secretarei-șef</label>
           <Select
-            value={formData?.secretary}
+            value={formData?.secretaryId}
             onChange={(value) => {
-              setFormData({ ...formData, secretary: value })
+              setFormData({ ...formData, secretaryId: value })
             }}
             options={secretaryOptions}
-          />
-        </Form.Item>
-        <Form.Item
-          name='specialization'
-          rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
-          <label className='add-specialization-label'>Programele de studii</label>
-          <Select
-            mode='multiple'
-            value={formData?.specialization}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                specialization: e,
-              })
-            }}
-            options={specializationOptions}
           />
         </Form.Item>
       </Form>
