@@ -19,10 +19,13 @@ export const importExcel = createAsyncThunk(studentsActions.IMPORT_STUDENTS, asy
   const response = await api.post('/users/import', formData)
   return response.data
 })
-export const getAllStudents: any = createAsyncThunk(studentsActions.GET_ALL_STUDENTS, async () => {
-  const response = await api.get('/users')
-  return response.data
-})
+export const getStudentsByDomain: any = createAsyncThunk(
+  studentsActions.GET_ALL_STUDENTS,
+  async (id: number) => {
+    const response = await api.get(`/users/domain/${id}`)
+    return response.data
+  },
+)
 
 const initialState: StudentsSliceState = {
   importFile: null,
@@ -36,7 +39,7 @@ export const studentsSlice = createSlice({
     builder.addCase(importExcel.fulfilled, (state: any, action: any) => {
       state.importFile = action.payload
     })
-    builder.addCase(getAllStudents.fulfilled, (state: any, action: any) => {
+    builder.addCase(getStudentsByDomain.fulfilled, (state: any, action: any) => {
       state.students = [...action.payload]
     })
   },

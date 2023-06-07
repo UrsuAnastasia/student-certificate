@@ -6,40 +6,49 @@ import React, { useEffect, useState } from 'react'
 import { StudentsImportModal } from '../students-import-modal/students-import-modal'
 
 import { useAppDispatch, useAppSelector } from 'store/store'
-import { getAllStudents } from 'features/students/store/students.slice'
+import { getStudentsByDomain } from 'features/students/store/students.slice'
 import { StudentList } from '../student-list/students-list'
 import { IStudents } from 'features/students/models/students.models'
 
 export const Students = () => {
   const [open, setOpen] = useState<boolean>(false)
+  const [tabIndex, setTabIndex] = useState<number>(1)
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const { Search } = Input
   const dispatch = useAppDispatch()
-  const onChange = (key: string) => {}
+  const onChangeTabs = (key: string) => {
+    setTabIndex(+key)
+  }
 
   const students = useAppSelector((state: any) => state.students.students)
 
   useEffect(() => {
-    dispatch(getAllStudents())
-  }, [dispatch])
+    dispatch(getStudentsByDomain(tabIndex))
+  }, [dispatch, tabIndex])
 
   const openModal = () => {
     setOpen(true)
   }
 
-  const listOfStudents = students?.map((item: IStudents) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setSearchTerm(value)
+  }
+  const studentsArray = students?.filter((student: IStudents) =>
+    student.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
+  const listOfStudents = studentsArray?.map((item: IStudents) => {
     return {
       key: item.id,
-      name: `${item.firstName} ${item.lastName}`,
-      fatherInitial: item.fatherInitial,
+      name: `${item.name}`,
       email: item.email,
-      domain: 'FIESC',
-      specialization: 'Calculatoare',
-      year: '2023',
-      financiarStatus: 'bursa',
+      domain: item.studyProgram,
+      specialization: item.studyDomain,
+      year: item.studyYear,
+      financiarStatus: item.financialStatus,
     }
   })
-  const items: TabsProps['items'] = [
+  const itemsTabs: TabsProps['items'] = [
     {
       key: '1',
       label: `Licenta`,
@@ -61,11 +70,12 @@ export const Students = () => {
             <h1 className='students-title'>Studenti</h1>
           </Col>
           <Col>
-            <Search
+            <Input
               size='large'
               placeholder='Cauta un student'
-              onSearch={() => {}}
+              onChange={handleSearch}
               style={{ width: 200 }}
+              // value={searchTerm}
             />
             <Button className='students-button' onClick={openModal}>
               Importa
@@ -73,7 +83,7 @@ export const Students = () => {
           </Col>
         </Row>
         <div>
-          <Tabs defaultActiveKey='1' items={items} onChange={onChange} />
+          <Tabs defaultActiveKey='1' items={itemsTabs} onChange={onChangeTabs} />
         </div>
       </Layout>
     </React.Fragment>

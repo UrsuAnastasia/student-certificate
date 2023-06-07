@@ -18,13 +18,6 @@ export const columns: ColumnsType<DataType> = [
     render: (text) => <span style={{ color: '#010c3f' }}>{text}</span>,
   },
   {
-    title: 'Inițiala tatălui',
-    dataIndex: 'fatherInitial',
-    key: 'email',
-    align: 'center',
-    render: (text) => <span>{text}</span>,
-  },
-  {
     title: 'Email',
     dataIndex: 'email',
     key: 'email',
