@@ -4,7 +4,7 @@ import { Button, Modal, Space, Table, Tag } from 'antd'
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from 'react'
 import { ColumnsType } from 'antd/es/table'
 import { DataTypeRequest, RequestsType, data } from 'features/requests/constants/request.constants'
-import { AiFillDownCircle, AiFillCloseCircle, AiFillDelete, AiOutlineCheck } from 'react-icons/ai'
+import { AiFillDelete, AiOutlineCheck } from 'react-icons/ai'
 
 const { confirm } = Modal
 export const Requests = () => {
