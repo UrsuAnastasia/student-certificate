@@ -35,8 +35,8 @@ export const DomainSettings = () => {
     <div className='domain'>
       <div className='domain-span'>Adauga un Domeniu</div>
 
-      <Form onFinish={onFinish} initialValues={initialValues} form={form}>
-        <span>Domeniu</span>
+      <Form style={{ width: '70%' }} onFinish={onFinish} initialValues={initialValues} form={form}>
+        <span className='domain-label'>Domeniu</span>
         <Form.Item
           name='domain'
           rules={[{ required: true, message: 'Acest camp este obligatoriu!' }]}>
@@ -45,13 +45,15 @@ export const DomainSettings = () => {
             onChange={(value) => {
               setFormData({ ...formData, name: value.target.value })
             }}
-            style={{ width: '600px' }}
+            style={{ width: '100%' }}
           />
         </Form.Item>
         <Form.Item>
           <div>
             <span className='domain-info'>
-              Pentru a adăuga un domeniu, este nevoie să setați anul curent.
+              {currentYear?.currentAcademicYear
+                ? ''
+                : 'Pentru a adăuga un domeniu, este nevoie să setați anul curent.'}
             </span>
           </div>
           <Button

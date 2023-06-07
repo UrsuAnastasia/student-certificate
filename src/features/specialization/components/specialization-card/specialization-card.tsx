@@ -10,12 +10,8 @@ export const SpecializationCard = () => {
       okType: 'danger',
       cancelText: 'Da',
       title: 'Vrei sa stergi aceste date?',
-      onOk() {
-        console.log('id', id)
-      },
-      onCancel() {
-        console.log('id', id)
-      },
+      onOk() {},
+      onCancel() {},
     })
   }
 

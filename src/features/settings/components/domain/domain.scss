@@ -8,6 +8,15 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 46px;
-    color: rgba(0, 0, 0, 0.88);
+    color: #010c3f;
+  }
+  &-label {
+    color: #8d8a8a;
+    font-size: 12px !important;
+    padding-bottom: 4px !important;
+  }
+  &-info {
+    color: red;
+    font-size: 12px;
   }
 }

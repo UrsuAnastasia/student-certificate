@@ -10,8 +10,17 @@
     line-height: 46px;
     color: rgba(0, 0, 0, 0.88);
   }
-
+  &-label {
+    color: #8d8a8a;
+    font-size: 12px !important;
+    padding-bottom: 4px !important;
+  }
   &-button {
     margin-top: 20px;
+  }
+  &-h1 {
+    font-size: 20px;
+    color: #010c3f;
+    font-weight: 500;
   }
 }

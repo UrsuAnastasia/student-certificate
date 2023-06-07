@@ -90,17 +90,23 @@ export const Settings = () => {
     <div className='settings'>
       <div className='settings-container'>
         <h1 className='settings-title'>Setări</h1>
-        <YearSeetings />
-        <DomainSettings />
-        <div className='settings-table'>
-          <h3 className='settings-table-title'>Lista de domenii</h3>
-          <Table
-            pagination={false}
-            rowClassName='requests-row'
-            size='large'
-            columns={columns}
-            dataSource={listOfStudents}
-          />
+        <div className='settings-section'>
+          <YearSeetings />
+        </div>
+        <div className='settings-section'>
+          <DomainSettings />
+        </div>
+        <div className='settings-section'>
+          <div className='settings-table'>
+            <h3 className='settings-table-title'>Lista de domenii</h3>
+            <Table
+              pagination={false}
+              rowClassName='requests-row'
+              size='large'
+              columns={columns}
+              dataSource={listOfStudents}
+            />
+          </div>
         </div>
       </div>
     </div>
