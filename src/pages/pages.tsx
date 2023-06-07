@@ -1,6 +1,4 @@
-import axios from 'axios'
 import { PAGES_PATHS } from 'common/constants/constant'
-import { OauthRedirect } from 'features/auth/components/login/auth-redirect'
 import { Login } from 'features/auth/components/login/login'
 import { Dashboard } from 'features/dashboard/components/dashboard/dashboard'
 import { Requests } from 'features/requests/components/requests/requests'

@@ -40,18 +40,18 @@ export const Settings = () => {
       render: (text) => <span style={{ color: '#7752a9', fontWeight: '400' }}>{text}</span>,
     },
     {
-      title: 'Nume',
+      title: 'Domeniu',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: 'Anul curent',
+      title: 'Anul universitar',
       dataIndex: 'currentYear',
       key: 'currentYear',
       render: (text) => <span style={{ color: '#7752a9', fontWeight: '400' }}>{text}</span>,
     },
     {
-      title: 'Action',
+      title: '',
       key: 'action',
       align: 'center',
       render: (
