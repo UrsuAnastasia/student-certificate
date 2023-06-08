@@ -1,41 +1,48 @@
-import { Card, Col, Modal, Row } from 'antd'
+import { Card, Col, Row } from 'antd'
 import './programes-card.scss'
 import { AiOutlineEye, AiOutlineClose } from 'react-icons/ai'
 import { getallStudyProgrames } from 'features/specialization/store/stydy-program.slice'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector, RootState } from 'store/store'
 import { ISpecialization } from 'features/specialization/models/models.specialization'
+import { AddSpecialization } from '../add-programes/add-programes'
 export const SpecializationCard = () => {
-  const { confirm } = Modal
-  const showConfirm = (id: number) => {
-    confirm({
-      okText: 'Nu',
-      okType: 'danger',
-      cancelText: 'Da',
-      title: 'Vrei sa stergi aceste date?',
-      onOk() {},
-      onCancel() {},
-    })
-  }
+  const [showEditModal, setShowEditModal] = useState<boolean>(false)
+  const [programId, setProgramId] = useState<number>(0)
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(getallStudyProgrames())
   }, [dispatch])
 
-  const allProgramesStudents: Array<ISpecialization> = useAppSelector(
+  const allProgramesStudentsSlice: Array<ISpecialization> = useAppSelector(
     (state: RootState) => state.studyProgram.studyProgrames,
   )
+
+  const handleEdit = (id: number) => {
+    setProgramId(id)
+    setShowEditModal(true)
+  }
+
   return (
     <Row gutter={[20, 20]}>
-      {allProgramesStudents?.map((item: ISpecialization, index: number) => (
+      {showEditModal ? (
+        <AddSpecialization
+          programId={programId}
+          isEditMode={true}
+          showModal={showEditModal}
+          setShowModal={setShowEditModal}
+        />
+      ) : null}
+      {allProgramesStudentsSlice?.map((item: ISpecialization, index: number) => (
         <Col xs={24} sm={12} md={8} lg={4} xl={6} key={index}>
           <Card hoverable className='card-container'>
             <div className='card-header'>
               <div className='card-eye'>
-                <AiOutlineEye />
+                <AiOutlineEye onClick={() => handleEdit(item.id!)} />
               </div>
-              <div className='card-trash' onClick={() => showConfirm(item.id!)}>
+              <div className='card-trash'>
                 <AiOutlineClose />
               </div>
             </div>

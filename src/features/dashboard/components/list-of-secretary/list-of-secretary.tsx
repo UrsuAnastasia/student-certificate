@@ -56,12 +56,6 @@ export const ListOfSecretary = () => {
       email: 'otilia.frunza@usm.ro',
       telephone: '+40 230 522978, ext.124',
     },
-    {
-      key: '5',
-      name: 'Secretaring. Lucia-Cristina POPESCU',
-      email: 'ionut.cimpan@usv.ro',
-      telephone: '+40 230 522978, ext.124',
-    },
   ]
 
   return (

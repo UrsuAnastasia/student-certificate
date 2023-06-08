@@ -15,10 +15,6 @@ export const secretaryList = [
     id: 4,
     value: 'Otilia FRUNZĂ',
   },
-  {
-    id: 5,
-    value: 'Lucia-Cristina POPESCU',
-  },
 ]
 
 export const faculties = [
@@ -59,13 +55,6 @@ export const faculties = [
     name: 'Echipamente şi sisteme medicale',
   },
 ]
-
-export const secretaryOptions = secretaryList.map((item) => {
-  return {
-    label: item.value,
-    value: item.id,
-  }
-})
 
 export const specializationOptions = faculties.map((item) => {
   return {

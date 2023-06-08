@@ -15,3 +15,8 @@ export type StudentsProgrames = {
   secretaryId: string
   secretaryName: string
 }
+
+export type Secretares = {
+  id: string
+  name: string
+}

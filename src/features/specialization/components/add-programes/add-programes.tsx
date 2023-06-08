@@ -1,25 +1,73 @@
 import { Button, Form, Input, Modal, Select } from 'antd'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import './add-program.scss'
-import { ISpecialization } from 'features/specialization/models/models.specialization'
-import { secretaryOptions } from 'features/specialization/constants/specialization.constants'
-import { addStudyProgram } from 'features/specialization/store/stydy-program.slice'
-import { useAppDispatch } from 'store/store'
+import { ISpecialization, Secretares } from 'features/specialization/models/models.specialization'
+import { RootState, useAppDispatch, useAppSelector } from 'store/store'
 import { errorModal, successModal } from 'common/hooks/useSomething'
+import {
+  addStudyProgram,
+  editStudyProgram,
+  getAllSecretary,
+  getStudyProgramById,
+} from 'features/specialization/store/stydy-program.slice'
+
 interface IAddModal {
   showModal: boolean
   setShowModal: (showModal: boolean) => void
+  isEditMode?: boolean
+  programId?: number
 }
-export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
+
+export const AddSpecialization: FC<IAddModal> = ({
+  showModal,
+  setShowModal,
+  isEditMode,
+  programId,
+}) => {
   const [formData, setFormData] = useState<ISpecialization>({
     name: '',
     acronym: '',
     secretaryId: '',
   })
 
+  const [form] = Form.useForm()
   const dispatch = useAppDispatch()
 
-  const [form] = Form.useForm()
+  useEffect(() => {
+    dispatch(getAllSecretary())
+  }, [dispatch])
+
+  const editedProgram: ISpecialization | null = useAppSelector(
+    (state: RootState) => state.studyProgram.studyProgram,
+  )
+
+  const secretaresSlice: Array<Secretares> = useAppSelector(
+    (state: RootState) => state.studyProgram.secretares,
+  )
+  useEffect(() => {
+    dispatch(getStudyProgramById(programId))
+  }, [dispatch])
+
+  useEffect(() => {
+    if (isEditMode && programId) {
+      setFormData({
+        name: editedProgram?.name || '',
+        acronym: editedProgram?.acronym || '',
+        secretaryId: editedProgram?.secretaryId || '',
+      })
+    } else {
+      setFormData({
+        name: '',
+        acronym: '',
+        secretaryId: '',
+      })
+    }
+  }, [dispatch, isEditMode, programId, editedProgram])
+
+  const secretaryOptions = secretaresSlice.map((item) => ({
+    label: item.name,
+    value: item.id,
+  }))
 
   const initialValues = [
     {
@@ -36,45 +84,69 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
     },
   ]
 
-  const hadlChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    })
-  }
-  const handleCancel = () => {
-    props.setShowModal(false)
+    }))
   }
 
-  const handlSubmit = async (values: any) => {
-    form.validateFields()
-    const payload = {
-      name: formData.name,
-      acronym: formData.acronym,
-      secretaryId: '4432df1b-43ed-47e7-b7b3-a43e53f04570',
-    }
-    const response = await dispatch(addStudyProgram(payload))
-    if (response.type === 'POST_YEAR/rejected') {
-      errorModal('Eroare', 'A aparut o eroare')
-    } else {
-      props.setShowModal(false)
-      successModal('Succes', 'Programul de studiu a fost adaugat cu succes.')
-    }
-    form.resetFields()
+  const handleCancel = () => {
+    setShowModal(false)
   }
+
+  const handleSubmit = async () => {
+    try {
+      await form.validateFields()
+
+      if (!editedProgram) {
+        const addProgram = {
+          name: formData.name,
+          acronym: formData.acronym,
+          secretaryId: formData.secretaryId,
+        }
+        const response = await dispatch(addStudyProgram(addProgram))
+        if (response.type === 'POST_YEAR/rejected') {
+          errorModal('Eroare', 'A apărut o eroare')
+        } else {
+          setShowModal(false)
+          successModal('Succes', 'Programul de studiu a fost adăugat cu succes.')
+        }
+      } else {
+        const editProgram = {
+          id: programId,
+          name: formData.name,
+          acronym: formData.acronym,
+          secretaryId: formData.secretaryId,
+        }
+        const response = await dispatch(editStudyProgram(editProgram))
+        if (response.type === 'POST_YEAR/rejected') {
+          errorModal('Eroare', 'A apărut o eroare')
+        } else {
+          setShowModal(false)
+          successModal('Succes', 'Programul de studiu a fost adăugat cu succes.')
+        }
+      }
+
+      form.resetFields()
+    } catch (error) {
+      console.log('Validation error:', error)
+    }
+  }
+
   return (
     <Modal
       footer={[
         <Button key='back' onClick={handleCancel}>
           Cancel
         </Button>,
-        <Button key='submit' type='primary' onClick={handlSubmit}>
+        <Button key='submit' type='primary' onClick={handleSubmit}>
           Adauga
         </Button>,
       ]}
-      open={props.showModal}
+      open={showModal}
       title='Adauga un program de studiu'
       onOk={handleCancel}
       onCancel={handleCancel}>
@@ -84,15 +156,15 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
         form={form}
         style={{ marginTop: '20px' }}
         fields={initialValues}
-        onFinish={handlSubmit}>
+        onFinish={handleSubmit}>
         <Form.Item name='name' rules={[{ required: true, message: 'Acest camp este obligatoriu' }]}>
           <label className='add-specialization-label'>Denumirea programului de studiu</label>
           <Input
             name='name'
             allowClear
             placeholder='FIESC'
-            onChange={hadlChangeInput}
-            value={formData.name}
+            onChange={handleChangeInput}
+            value={formData.name!}
           />
         </Form.Item>
         <Form.Item
@@ -104,7 +176,7 @@ export const AddSpecialization: FC<IAddModal> = ({ ...props }) => {
             name='acronym'
             allowClear
             placeholder='FIESC'
-            onChange={hadlChangeInput}
+            onChange={handleChangeInput}
             value={formData.acronym}
           />
         </Form.Item>
