@@ -1,7 +1,10 @@
 import { Card, Col, Modal, Row } from 'antd'
-import './specialization-card.scss'
-import { faculties } from 'features/specialization/constants/specialization.constants'
+import './programes-card.scss'
 import { AiOutlineEye, AiOutlineClose } from 'react-icons/ai'
+import { getallStudyProgrames } from 'features/specialization/store/stydy-program.slice'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector, RootState } from 'store/store'
+import { ISpecialization } from 'features/specialization/models/models.specialization'
 export const SpecializationCard = () => {
   const { confirm } = Modal
   const showConfirm = (id: number) => {
@@ -14,17 +17,25 @@ export const SpecializationCard = () => {
       onCancel() {},
     })
   }
+  const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    dispatch(getallStudyProgrames())
+  }, [dispatch])
+
+  const allProgramesStudents: Array<ISpecialization> = useAppSelector(
+    (state: RootState) => state.studyProgram.studyProgrames,
+  )
   return (
     <Row gutter={[20, 20]}>
-      {faculties.map((item, index) => (
+      {allProgramesStudents?.map((item: ISpecialization, index: number) => (
         <Col xs={24} sm={12} md={8} lg={4} xl={6} key={index}>
           <Card hoverable className='card-container'>
             <div className='card-header'>
               <div className='card-eye'>
                 <AiOutlineEye />
               </div>
-              <div className='card-trash' onClick={() => showConfirm(item.id)}>
+              <div className='card-trash' onClick={() => showConfirm(item.id!)}>
                 <AiOutlineClose />
               </div>
             </div>
@@ -47,7 +58,7 @@ export const SpecializationCard = () => {
                 Elena Curulean
               </p>
               <p>
-                <span className='card-details'>Secretar: </span> Laura Dospinescu
+                <span className='card-details'>Secretar: </span> {item.secretaryName}
               </p>
             </div>
             <div className='card-footer'>2022-2023</div>

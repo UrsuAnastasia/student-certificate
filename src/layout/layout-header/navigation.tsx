@@ -10,10 +10,21 @@ import {
   AiFillFile,
   AiFillSetting,
 } from 'react-icons/ai'
-import { Button } from 'antd'
+import { Avatar, Button } from 'antd'
+import { RootState, useAppDispatch, useAppSelector } from 'store/store'
+import { useEffect } from 'react'
+import { getCurrentUser } from 'features/auth/store/auth.slice'
 export const Navbar: React.FC = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
+
+  const dispatch = useAppDispatch()
+
+  const currentUSer = useAppSelector((state: RootState) => state.user)
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
 
   const navbarList = [
     {
@@ -53,7 +64,10 @@ export const Navbar: React.FC = () => {
             />
           </div>
         </Col>
-        <Col lg={14} xl={12} style={{ display: 'flex', justifyContent: 'space-between ' }}>
+        <Col
+          lg={16}
+          xl={14}
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {navbarList.map((item, index) => {
             return (
               <div
@@ -66,6 +80,13 @@ export const Navbar: React.FC = () => {
               </div>
             )
           })}
+          <Avatar
+            onClick={() => {
+              navigate(PAGES_PATHS.PROFILE)
+            }}
+            size={50}
+            src={currentUSer.user?.profileImageUrl!}
+          />
           <div>
             <Button
               className='navbar-button'

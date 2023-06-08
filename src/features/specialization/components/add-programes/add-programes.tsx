@@ -1,6 +1,6 @@
 import { Button, Form, Input, Modal, Select } from 'antd'
 import { FC, useState } from 'react'
-import './add-specialization.scss'
+import './add-program.scss'
 import { ISpecialization } from 'features/specialization/models/models.specialization'
 import { secretaryOptions } from 'features/specialization/constants/specialization.constants'
 import { addStudyProgram } from 'features/specialization/store/stydy-program.slice'

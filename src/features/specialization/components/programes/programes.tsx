@@ -1,24 +1,13 @@
-import { Button, Col, Input, Layout, Row, Tabs, TabsProps } from 'antd'
-import './specilaization.scss'
-import { SpecializationCard } from '../specialization-card/specialization-card'
+import { Button, Col, Input, Layout, Row } from 'antd'
+import './programes.scss'
+import { SpecializationCard } from '../programes-card/programes-card'
 import { useState } from 'react'
-import { AddSpecialization } from '../add-specialization/add-specialization'
+import { AddSpecialization } from '../add-programes/add-programes'
+
 export const Specialization = () => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const onChange = (key: string) => {}
+
   const { Search } = Input
-  const items: TabsProps['items'] = [
-    {
-      key: '1',
-      label: `Licenta`,
-      children: <SpecializationCard />,
-    },
-    {
-      key: '2',
-      label: `Master`,
-      children: <SpecializationCard />,
-    },
-  ]
   return (
     <Layout className='faculty'>
       {showModal ? <AddSpecialization showModal={showModal} setShowModal={setShowModal} /> : null}
@@ -37,7 +26,7 @@ export const Specialization = () => {
           </Button>
         </Col>
       </Row>
-      <Tabs style={{ margin: '0px' }} defaultActiveKey='1' items={items} onChange={onChange} />
+      <SpecializationCard />
     </Layout>
   )
 }

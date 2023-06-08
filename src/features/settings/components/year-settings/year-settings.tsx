@@ -14,6 +14,7 @@ export const YearSeetings = () => {
   const dispatch = useAppDispatch()
 
   const currentYear = useAppSelector((state: RootState) => state.settings.year)
+
   useEffect(() => {
     dispatch(getCurrentYear())
   }, [dispatch, currentYear])

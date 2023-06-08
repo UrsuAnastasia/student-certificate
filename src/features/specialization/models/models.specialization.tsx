@@ -6,3 +6,12 @@ export type ISpecialization = {
   secretaryId: string
   secretaryName?: string
 }
+
+export type StudentsProgrames = {
+  acronym: string
+  description: string
+  id: null
+  name: string
+  secretaryId: string
+  secretaryName: string
+}

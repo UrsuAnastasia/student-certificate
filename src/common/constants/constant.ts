@@ -6,4 +6,5 @@ export const PAGES_PATHS = {
   STUDENT: '/studenti',
   REQUESTS: '/cereri',
   SETTINGS: '/setari',
+  PROFILE: '/profilul-meu',
 }

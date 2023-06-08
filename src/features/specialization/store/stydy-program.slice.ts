@@ -5,8 +5,9 @@ import api from 'api/api'
 import { ISpecialization } from '../models/models.specialization'
 export enum studyProgramActions {
   ADD_STUDY_PROGRAM = 'ADD_STUDY_PROGRAM',
+  GET_ALL_STUDY_PROGRAMS = 'GET_ALL_STUDY_PROGRAMS',
 }
-interface CertificateSliceState {
+interface StudyProgramSliceState {
   studyProgrames: Array<ISpecialization>
 }
 
@@ -18,19 +19,33 @@ export const addStudyProgram: any = createAsyncThunk(
   },
 )
 
-const initialState: CertificateSliceState = {
+export const getallStudyProgrames: any = createAsyncThunk(
+  studyProgramActions.GET_ALL_STUDY_PROGRAMS,
+  async () => {
+    const response = await api.get('study-programs')
+    return response.data
+  },
+)
+
+const initialState: StudyProgramSliceState = {
   studyProgrames: [],
 }
-export const certificateSlice = createSlice({
-  name: 'certificate',
+export const studyProgrameSlice = createSlice({
+  name: 'studyProgram',
   initialState,
   reducers: {},
   extraReducers(builder: any) {
-    builder.addCase(addStudyProgram.fulfilled, (state: CertificateSliceState, action: any) => {
+    builder.addCase(
+      getallStudyProgrames.fulfilled,
+      (state: StudyProgramSliceState, action: any) => {
+        state.studyProgrames = [...action.payload]
+      },
+    )
+    builder.addCase(addStudyProgram.fulfilled, (state: StudyProgramSliceState, action: any) => {
       state.studyProgrames = [...state.studyProgrames, action.payload]
     })
   },
 })
 
-export default certificateSlice.reducer
-export const certificateSelector = (state: RootState) => state.certificate
+export default studyProgrameSlice.reducer
+export const studyProgramSelector = (state: RootState) => state.studyProgram

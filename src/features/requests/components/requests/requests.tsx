@@ -1,31 +1,54 @@
 import Layout from 'antd/es/layout/layout'
 import './requests.scss'
 import { Button, Modal, Space, Table, Tag } from 'antd'
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from 'react'
+import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, useEffect } from 'react'
 import { ColumnsType } from 'antd/es/table'
-import { DataTypeRequest, RequestsType, data } from 'features/requests/constants/request.constants'
-import { AiFillDelete, AiOutlineCheck } from 'react-icons/ai'
+import { DataTypeRequest, RequestsType } from 'features/requests/constants/request.constants'
+import { AiOutlineClose, AiOutlineCheck } from 'react-icons/ai'
+import { RootState, useAppDispatch, useAppSelector } from 'store/store'
+import {
+  approveDeclineRequest,
+  getAllRequestBySecretaryId,
+} from 'features/requests/store/request.slice'
+import { IRequests, PostRequest, Status } from 'features/requests/models/request.models'
 
 const { confirm } = Modal
 export const Requests = () => {
-  const showDeleteConfirm = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getAllRequestBySecretaryId('4432df1b-43ed-47e7-b7b3-a43e53f04570'))
+  }, [dispatch])
+
+  const requsetSlice = useAppSelector((state: RootState) => state.request)
+  const showDeleteConfirm = (key: any) => {
     confirm({
-      title: 'Vrei sa declini aceasta cerere?',
-      okText: 'DA',
+      title: 'Vrei să declini această cerere?',
+      okText: 'Iesi',
       okType: 'danger',
-      cancelText: 'Nu',
-      onOk() {},
-      onCancel() {},
+      cancelText: 'Da',
+      onCancel() {
+        const payload: PostRequest = {
+          id: +key,
+          status: Status.DECLINED,
+        }
+        dispatch(approveDeclineRequest(payload))
+      },
     })
   }
 
-  const showConfirm = () => {
+  const showConfirm = (key: any) => {
     confirm({
       title: 'Vrei sa accepti aceasta cerere?',
-      okText: 'NU',
+      okText: 'Iesi',
       cancelText: 'Da',
-      onOk() {},
-      onCancel() {},
+      onCancel() {
+        const payload: PostRequest = {
+          id: +key,
+          status: Status.APPROVED,
+        }
+        dispatch(approveDeclineRequest(payload))
+      },
     })
   }
   const renderColor = (color: string) => {
@@ -40,6 +63,15 @@ export const Requests = () => {
         return 'foo'
     }
   }
+  const listOfRequest = requsetSlice?.requests!.map((item: IRequests) => {
+    return {
+      key: item.id.toString(),
+      name: item.studentName,
+      email: item.studentEmail,
+      faculty: item.studyProgram,
+      status: item.status,
+    }
+  })
 
   const columns: ColumnsType<DataTypeRequest> = [
     {
@@ -82,7 +114,7 @@ export const Requests = () => {
       render: (
         _: any,
         record: {
-          name:
+          key:
             | string
             | number
             | boolean
@@ -96,14 +128,14 @@ export const Requests = () => {
         <Space size='middle'>
           <Button
             style={{ border: '1px solid #62b33e', background: '#f6ffed' }}
-            onClick={showConfirm}
+            onClick={() => showConfirm(record?.key)}
             icon={<AiOutlineCheck style={{ color: '#62b33e' }} />}
           />
           <Button
             style={{ border: '1px solid red', background: '#fff2e8' }}
             color='red'
-            onClick={() => showDeleteConfirm()}
-            icon={<AiFillDelete style={{ fill: 'red' }} />}
+            onClick={() => showDeleteConfirm(record?.key)}
+            icon={<AiOutlineClose style={{ fill: 'red' }} />}
           />
         </Space>
       ),
@@ -113,7 +145,12 @@ export const Requests = () => {
     <Layout className='requests-list'>
       <h1 className='requests-list-title'>Cereri</h1>
       <div>
-        <Table rowClassName='requests-row' size='large' columns={columns} dataSource={data} />
+        <Table
+          rowClassName='requests-row'
+          size='large'
+          columns={columns}
+          dataSource={listOfRequest}
+        />
       </div>
     </Layout>
   )
