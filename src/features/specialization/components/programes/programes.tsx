@@ -6,17 +6,27 @@ import { AddSpecialization } from '../add-programes/add-programes'
 
 export const Specialization = () => {
   const [showModal, setShowModal] = useState<boolean>(false)
-
-  const { Search } = Input
+  const [searchProgram, setSearchProgram] = useState<string>('')
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setSearchProgram(value)
+  }
   return (
     <Layout className='faculty'>
       {showModal ? <AddSpecialization showModal={showModal} setShowModal={setShowModal} /> : null}
       <Row align={'middle'} justify={'space-between'} style={{ marginBottom: '20px' }}>
         <Col>
-          <h1 className='faculty-title'>Program de studii</h1>
+          <h1 className='faculty-title'>
+            Facultatea de Inginerie Electrică și Știința Calculatoarelor
+          </h1>
         </Col>
         <Col>
-          <Search size='large' placeholder='Cauta...' onSearch={() => {}} style={{ width: 200 }} />
+          <Input
+            size='large'
+            placeholder='Cauta programul de studiu...'
+            onChange={handleSearch}
+            style={{ width: 300 }}
+          />
           <Button
             className='students-button'
             onClick={() => {
@@ -26,7 +36,7 @@ export const Specialization = () => {
           </Button>
         </Col>
       </Row>
-      <SpecializationCard />
+      <SpecializationCard searchProgram={searchProgram} setSearchProgram={setSearchProgram} />
     </Layout>
   )
 }

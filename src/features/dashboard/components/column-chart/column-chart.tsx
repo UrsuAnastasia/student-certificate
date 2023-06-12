@@ -1,3 +1,4 @@
+import { getAllRaports } from 'features/dashboard/store/dashboard.slice'
 import './column-chart.scss'
 import {
   Chart as ChartJS,
@@ -8,9 +9,18 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
+import { useEffect } from 'react'
 import { Bar } from 'react-chartjs-2'
+import { RootState, useAppDispatch, useAppSelector } from 'store/store'
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 export const RequestsChart = () => {
+  const dispatch = useAppDispatch()
+  const raportSlice = useAppSelector((state: RootState) => state.dashboard.raport)
+
+  useEffect(() => {
+    dispatch(getAllRaports())
+  }, [dispatch])
+
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -28,17 +38,17 @@ export const RequestsChart = () => {
     datasets: [
       {
         label: 'Noi',
-        data: [0, 8, 10, 20],
+        data: [0, 0, 0, 0, 0, raportSlice?.createdThisMonth!],
         backgroundColor: '#ffea90',
       },
       {
         label: 'Acceptate',
-        data: [0, 8, 10, 20],
+        data: [0, 0, 0, 0, 0, raportSlice?.acceptedThisMonth!],
         backgroundColor: '#244eb6',
       },
       {
         label: 'Refuzate',
-        data: [0, 8, 10, 20],
+        data: [0, 0, 0, 0, 0, raportSlice?.refusedThisMonth!],
         backgroundColor: '#967ae1',
       },
     ],

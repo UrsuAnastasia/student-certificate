@@ -14,8 +14,9 @@ export const PageRouter = () => {
   return (
     <Routes>
       <Route path={PAGES_PATHS.LOGIN} element={<Login />} />
-      <Route path={PAGES_PATHS.STUDENT_REQUEST} element={<StudentRequest />} />
+      {/* <Route path={PAGES_PATHS.STUDENT_REQUEST} element={<StudentRequest />} /> */}
       <Route element={<LayoutBody />}>
+        <Route path={PAGES_PATHS.STUDENT_REQUEST} element={<StudentRequest />} />
         <Route path={PAGES_PATHS.DASHBOARD} element={<Dashboard />} />
         <Route path={PAGES_PATHS.SPECIALIZATION} element={<Specialization />} />
         <Route path={PAGES_PATHS.STUDENT} element={<Students />} />

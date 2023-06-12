@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from 'features/auth/store/auth.slice'
+import dashboardSlice from 'features/dashboard/store/dashboard.slice'
 import requestSlice from 'features/requests/store/request.slice'
 import settingsSlice from 'features/settings/store/settings.slice'
 import studyProgrameSlice from 'features/specialization/store/stydy-program.slice'
@@ -15,6 +16,7 @@ export const store = configureStore({
     settings: settingsSlice,
     user: userSlice,
     request: requestSlice,
+    dashboard: dashboardSlice,
   },
 })
 

@@ -16,9 +16,9 @@ export const StudentRequest = () => {
   const [request, setRequest] = useState<IRequest>({
     reason: '',
   })
+  const navigate = useNavigate()
   const [form] = Form.useForm()
 
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const currentUSer = useAppSelector((state: RootState) => state.user)
@@ -43,7 +43,7 @@ export const StudentRequest = () => {
       errorModal('Eroare', 'A aparut o eroare')
     } else {
       successModal('Succes', 'Cererea a fost creata cu succes.')
-      navigate(PAGES_PATHS.DASHBOARD)
+      navigate(PAGES_PATHS.PROFILE)
     }
     form.resetFields()
   }
@@ -71,7 +71,6 @@ export const StudentRequest = () => {
             <TextArea
               placeholder='Adeverinta se elibereaza pentru....'
               rows={10}
-              maxLength={16}
               onChange={({ target: { value } }) => {
                 setRequest({ ...request, reason: value })
               }}

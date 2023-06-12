@@ -1,8 +1,17 @@
 import { Col, Layout, Row } from 'antd'
 import './user-hello.scss'
 import moment from 'moment'
+import { RootState, useAppDispatch, useAppSelector } from 'store/store'
+import { useEffect } from 'react'
+import { getCurrentUser } from 'features/auth/store/auth.slice'
 
 export const UserHello = () => {
+  const dispatch = useAppDispatch()
+  const userSlice = useAppSelector((state: RootState) => state.user.user)
+
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, [dispatch])
   const currentTime = moment()
   const currentTimeString = currentTime.format('dddd, DD MMM YYYY')
   return (
@@ -16,7 +25,7 @@ export const UserHello = () => {
           />
         </Col>
         <Col span={16}>
-          <div className='user-hello-name'>Buna, Anastasia!</div>
+          <div className='user-hello-name'>Buna, {userSlice?.firstName}!</div>
           <p className='user-hello-message'>
             Suntem aici pentru a vă oferi suportul de care aveți nevoie pentru a vă concentra pe
             ceea ce contează

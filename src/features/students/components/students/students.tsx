@@ -12,7 +12,7 @@ import { IStudents } from 'features/students/models/students.models'
 
 export const Students = () => {
   const [open, setOpen] = useState<boolean>(false)
-  const [tabIndex, setTabIndex] = useState<number>(1)
+  const [tabIndex, setTabIndex] = useState<number>(3)
   const [searchTerm, setSearchTerm] = useState('')
 
   const dispatch = useAppDispatch()
@@ -50,12 +50,12 @@ export const Students = () => {
   })
   const itemsTabs: TabsProps['items'] = [
     {
-      key: '1',
+      key: '3',
       label: `Licenta`,
       children: <StudentList data={listOfStudents} columns={columns} />,
     },
     {
-      key: '2',
+      key: '4',
       label: `Master`,
       children: <StudentList data={listOfStudents} columns={columns} />,
     },

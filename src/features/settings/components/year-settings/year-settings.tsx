@@ -17,7 +17,7 @@ export const YearSeetings = () => {
 
   useEffect(() => {
     dispatch(getCurrentYear())
-  }, [dispatch, currentYear])
+  }, [dispatch])
 
   useEffect(() => {
     if (currentYear?.currentAcademicYear!) {

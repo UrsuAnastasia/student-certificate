@@ -4,11 +4,12 @@ import { Avatar, Button, Space, Table, Tag } from 'antd'
 import { getCurrentUser } from 'features/auth/store/auth.slice'
 import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useEffect } from 'react'
 import { useAppDispatch, useAppSelector, RootState } from 'store/store'
-import { getRequestByStudentId } from 'features/requests/store/request.slice'
+import { generatePdf, getRequestByStudentId } from 'features/requests/store/request.slice'
 import { RequestsType } from 'features/requests/constants/request.constants'
 import { ColumnsType } from 'antd/es/table'
 import { IRequestsStudent } from 'features/requests/models/request.models'
 import { AiFillFileText } from 'react-icons/ai'
+import { errorModal, successModal } from 'common/hooks/useSomething'
 export const UserProfile = () => {
   const dispatch = useAppDispatch()
 
@@ -21,8 +22,9 @@ export const UserProfile = () => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getRequestByStudentId('8ae86654-5479-4a47-92eb-ea5823d93a92'))
-  }, [dispatch, currentUser.user])
+    dispatch(getRequestByStudentId(currentUser.user?.id!))
+  }, [dispatch, currentUser.user?.id])
+
   const renderColor = (color: string) => {
     switch (color) {
       case RequestsType.APPROVED:
@@ -33,6 +35,16 @@ export const UserProfile = () => {
         return 'volcano'
       default:
         return 'foo'
+    }
+  }
+  const generatePdfhandle = async (id: any) => {
+    const response: any = await dispatch(generatePdf(id))
+    if (response.type === 'GENERATE_PDF/rejected') {
+      errorModal('Eroare', 'A aparut o eroare')
+    } else {
+      successModal('Succes', 'PDF a fost generat cu succes.')
+      // Open the generated PDF in a new browser tab
+      window.open(response.data ? response.data : '', '_blank')
     }
   }
   const columns: ColumnsType<any> = [
@@ -71,6 +83,7 @@ export const UserProfile = () => {
       render: (
         _: any,
         record: {
+          status: any
           key:
             | string
             | number
@@ -84,9 +97,18 @@ export const UserProfile = () => {
       ) => (
         <Space size='middle'>
           <Button
+            disabled={record.status === RequestsType.DECLINED || record.status === RequestsType.NEW}
             style={{ border: '1px solid #62b33e', background: '#f6ffed' }}
-            onClick={() => {}}
-            icon={<AiFillFileText style={{ color: '#62b33e' }} />}
+            onClick={() => generatePdfhandle(record!.key)}
+            icon={
+              <AiFillFileText
+                style={
+                  record.status === RequestsType.DECLINED || record.status === RequestsType.NEW
+                    ? { color: '' }
+                    : { color: '#62b33e' }
+                }
+              />
+            }
           />
         </Space>
       ),
@@ -95,6 +117,7 @@ export const UserProfile = () => {
 
   const listOfRequest = studentRequest.map((item: IRequestsStudent) => {
     return {
+      key: item.id,
       status: item.status,
       requestedDate: item.requestedDate,
       reason: item.reason,
@@ -114,6 +137,7 @@ export const UserProfile = () => {
         </div>
         <div className='user-profile-avatar-second-cotainer'>
           <h4 className='user-profile-name'>{`${currentUser.user?.firstName} ${currentUser.user?.lastName}`}</h4>
+          <p className='user-profile-email'>{currentUser.user?.email}</p>
         </div>
       </div>
 

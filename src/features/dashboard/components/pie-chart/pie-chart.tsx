@@ -5,25 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 ChartJS.register(ArcElement, Tooltip, Legend)
 interface ILicense {
   title: string
-}
-export const data = {
-  labels: [
-    'Calculatoare',
-    'Electronica aplicata',
-    'Reţele şi software de telecomunicaţii',
-    'Sisteme electrice',
-    'Energetică şi tehnologii informatice',
-    'Managementul energiei',
-  ],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: ['#ffea90', '#244eb6', '#967ae1', '#fdbace', '#982cc9', '#30a9fa'],
-      borderColor: ['#ffea90', '#244eb6', '#967ae1', '#fdbace', '#982cc9', '#30a9fa'],
-      borderWidth: 1,
-    },
-  ],
+  data: any
 }
 const options = {
   responsive: true,
@@ -41,7 +23,7 @@ export const PieChart: FC<ILicense> = ({ ...props }: any) => {
         <h1 className='pie-title'>{props.title}</h1>
       </div>
       <div className='pie-chart'>
-        <Doughnut width={'40%'} height={170} options={options} data={data} />
+        <Doughnut width={'40%'} height={170} options={options} data={props.data} />
       </div>
     </div>
   )

@@ -2,11 +2,16 @@ import { Card, Col, Row } from 'antd'
 import './programes-card.scss'
 import { AiOutlineEye, AiOutlineClose } from 'react-icons/ai'
 import { getallStudyProgrames } from 'features/specialization/store/stydy-program.slice'
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector, RootState } from 'store/store'
 import { ISpecialization } from 'features/specialization/models/models.specialization'
 import { AddSpecialization } from '../add-programes/add-programes'
-export const SpecializationCard = () => {
+
+interface IProgrames {
+  searchProgram: string
+  setSearchProgram: (searchProgram: string) => void
+}
+export const SpecializationCard: FC<IProgrames> = ({ searchProgram, setSearchProgram }) => {
   const [showEditModal, setShowEditModal] = useState<boolean>(false)
   const [programId, setProgramId] = useState<number>(0)
 
@@ -14,7 +19,7 @@ export const SpecializationCard = () => {
 
   useEffect(() => {
     dispatch(getallStudyProgrames())
-  }, [dispatch])
+  }, [dispatch, searchProgram])
 
   const allProgramesStudentsSlice: Array<ISpecialization> = useAppSelector(
     (state: RootState) => state.studyProgram.studyProgrames,
@@ -24,7 +29,9 @@ export const SpecializationCard = () => {
     setProgramId(id)
     setShowEditModal(true)
   }
-
+  const studentsArray = allProgramesStudentsSlice?.filter((program: ISpecialization) =>
+    program.name.toLowerCase().includes(searchProgram.toLowerCase()),
+  )
   return (
     <Row gutter={[20, 20]}>
       {showEditModal ? (
@@ -35,7 +42,7 @@ export const SpecializationCard = () => {
           setShowModal={setShowEditModal}
         />
       ) : null}
-      {allProgramesStudentsSlice?.map((item: ISpecialization, index: number) => (
+      {studentsArray?.map((item: ISpecialization, index: number) => (
         <Col xs={24} sm={12} md={8} lg={4} xl={6} key={index}>
           <Card hoverable className='card-container'>
             <div className='card-header'>

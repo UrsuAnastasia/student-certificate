@@ -1,8 +1,9 @@
 import { Col, Layout, Row } from 'antd'
 import { UserHello } from '../user-hello/user-hello'
-import { PieChart } from '../pie-chart/pie-chart'
 import { RequestsChart } from '../column-chart/column-chart'
 import { ListOfSecretary } from '../list-of-secretary/list-of-secretary'
+import { License } from '../license/license'
+import { Master } from '../master/master'
 
 export const Dashboard = () => {
   return (
@@ -14,8 +15,8 @@ export const Dashboard = () => {
         </Col>
         <Col span={10}>
           <UserHello />
-          <PieChart title={'Nr. de studenti inscrisi la licenta'} />
-          <PieChart title={'Nr. de studenti inscrisi la master'} />
+          <License number={3} />
+          <Master number={4} />
         </Col>
       </Row>
     </Layout>

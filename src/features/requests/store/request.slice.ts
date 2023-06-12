@@ -7,16 +7,19 @@ export enum requestsActions {
   GET_ALL_REQUEST_BY_SECRETARY_ID = 'GET_ALL_REQUEST_BY_SECRETARY_ID',
   APPROVE_DECLINE_REQUEST = 'APPROVE_DECLINE_REQUEST',
   GET_REQUEST_BY_STUDENT_ID = 'GET_REQUEST_BY_STUDENT_ID',
+  GENERATE_PDF = 'GENERATE_PDF',
 }
 
 interface RequestSliceState {
   requests: Array<IRequests>
   studentRequest: Array<IRequestsStudent>
+  pdf: any | null
 }
 
 const initialState: RequestSliceState = {
   requests: [],
   studentRequest: [],
+  pdf: null,
 }
 
 export const getAllRequestBySecretaryId = createAsyncThunk(
@@ -45,6 +48,10 @@ export const getRequestByStudentId = createAsyncThunk(
     return response.data
   },
 )
+export const generatePdf = createAsyncThunk(requestsActions.GENERATE_PDF, async (id: string) => {
+  const response = await api.post(`certificate-requests/generate-certificate/${id}`)
+  return response
+})
 export const requestSlice = createSlice({
   name: 'request',
   initialState,

@@ -1,11 +1,20 @@
 .request {
-  height: 100vh;
   overflow: hidden;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('https://cdn.wallpapersafari.com/4/53/lGdYRW.jpg');
   position: relative;
+  filter: drop-shadow(4px 3px 9px #7f828d) drop-shadow(-7px -7px 19px #fafbfc);
+  background-color: #ffff;
+  color: rgb(91, 91, 152);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  overflow: hidden;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 50px 30px;
+  margin: 20px;
+  height: 90vh;
   &-first-conatiner {
     h1 {
       top: 250px;
@@ -45,7 +54,7 @@
   }
 
   &-logo {
-    margin-top: 50px;
+    margin-top: 0px;
     width: 250px;
     z-index: 11111;
     left: 0;
